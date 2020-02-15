@@ -10,10 +10,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            primaryColor: Colors.white,
-            accentColor : Color(0xffeaeaea),
-            fontFamily: 'Quark'
-        ),
+            primaryTextTheme: TextTheme(title: TextStyle(color: Colors.white),),
+            primaryIconTheme: IconThemeData(color: Colors.white),
+            primaryColor: Colors.deepOrange,
+            accentColor: Color(0xffeaeaea),
+            fontFamily: 'Quark'),
         title: 'enetb',
         home: SplashScreen());
   }

@@ -228,26 +228,27 @@ class MenuOnlineScreenTeacher extends StatelessWidget {
 
 class WebViewScreen extends StatefulWidget {
   WebViewScreen({
-    @required this.urlString,
+    @required this.urlString, this.titleString,
 
   });
 
-  final String urlString;
+  final String urlString, titleString;
   @override
-  WebviewScreentState createState() => new WebviewScreentState(urlString);
+  WebviewScreentState createState() => new WebviewScreentState(urlString, titleString);
 
 }
 
 class WebviewScreentState extends State<WebViewScreen> {
 
-  WebviewScreentState(this.urlString);  //constructor
+  WebviewScreentState(this.urlString, this.titleString);  //constructor
   final String urlString;
+  final String titleString;
 
 @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('เว็บไซต์'),
+        title: Text(titleString),
         centerTitle: true, backgroundColor: PrimaryColor
       ),
       body: WebView(
