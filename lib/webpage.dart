@@ -6,107 +6,41 @@ class WebPage extends StatefulWidget {
 }
 
 class _WebPageState extends State<WebPage> {
+//  Field
+  List<String> titles = [
+    'สถานีโทรทัศน์ระบบดิจิตัล',
+    'แขนงวิชา',
+    'สหกิจศึกษา',
+    'ปริญญานิพนธ์'
+  ];
+  List<String> urls = ['http://k-dbtv.kmutnb.ac.th/', 'http://broadcast.elec.cit.kmutnb.ac.th/main/en/', 'http://broadcast.elec.cit.kmutnb.ac.th/co-operative/', 'http://broadcast.elec.cit.kmutnb.ac.th/project/index.php'];
+
+//  Method
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: <Widget>[
-          Container(
-              color: Colors.white),
-          Padding(
-            padding: const EdgeInsets.all(40.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                RaisedButton(
-                  onPressed: (){},
-                  color: Colors.deepOrangeAccent,
-                  child: Text('KDTV',style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                RaisedButton(
-                  onPressed: (){},
-                  color: Colors.red,
-                  child: Text('Enet-B',style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                RaisedButton(
-                  onPressed: (){},
-                  color: Colors.deepOrangeAccent,
-                  child: Text('สหกิจศึกษา',style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                RaisedButton(
-                  onPressed: (){},
-                  color: Colors.red,
-                  child: Text('เว็บไซต์ 1',style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                RaisedButton(
-                  onPressed: (){},
-                  color: Colors.deepOrangeAccent,
-                  child: Text('เว็ปไซต์ 2',style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                RaisedButton(
-                  onPressed: (){},
-                  color: Colors.red,
-                  child: Text('เว็ปไซต์ 3',style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                RaisedButton(
-                  onPressed: (){},
-                  color: Colors.deepOrangeAccent,
-                  child: Text('เว็ปไซต์ 4',style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                RaisedButton(
-                  onPressed: (){},
-                  color: Colors.red,
-                  child: Text('เว็ปไซต์ 5',style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
+      appBar: AppBar(
+        elevation: 0,
+        title: Text('เว็บไซต์'),
+      ),
+      body:
+      Container(
+        decoration: BoxDecoration(color: Colors.deepOrange),
+        child : Center(
+        child: ListView.builder(
+          itemCount: titles.length,
+          itemBuilder: (BuildContext buildContext, int index) {
+            return RaisedButton(
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              child: Text(titles[index]),
+            );
+          },
+        ),
+        ),
       ),
     );
   }

@@ -1,5 +1,7 @@
 import 'file:///C:/Users/Supanneew/Desktop/flutter_app-master/flutter_app-master/lib/MenuOnlineScreen.dart';
 import 'package:enetb/calendara.dart';
+import 'package:enetb/webpage.dart';
+import 'package:enetb/workpage.dart';
 import 'package:flutter/material.dart';
 import 'package:enetb/FirstScreen.dart';
 import 'file:///C:/Users/Supanneew/Desktop/flutter_app-master/flutter_app-master/lib/ProfileScreen.dart';
@@ -65,13 +67,20 @@ class HomePagetState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      margin: EdgeInsets.fromLTRB(5.0, 30.0, 10.0, 5.0),
-      padding: EdgeInsets.all(mainPadding),
-      child: Table(
-        children: [
-          TableRow(children: [
-            Container(
+      body: Container(
+        margin: EdgeInsets.fromLTRB(5.0, 30.0, 10.0, 5.0),
+        padding: EdgeInsets.all(mainPadding),
+        child: Table(
+          children: [
+            TableRow(children: [
+              tableLearning(context),
+              myCalendar(context),
+              myWebsite()
+            ]),
+            TableRow(children: [subjectTeching(), officer(), classRoom()]),
+            TableRow(children: [jobStudent(), dataGraph(), myMap()]),
+            TableRow(children: [
+              Container(
                 padding: EdgeInsets.all(eachPadding),
                 child: Column(
                   children: <Widget>[
@@ -79,16 +88,16 @@ class HomePagetState extends State<HomePage> {
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute<Null>(
                             builder: (BuildContext context) {
-                          return new WebViewScreen(urlString: urlSche, titleString: 'เว็บไซต์',);
+                          return new WebViewScreen(urlString: urlExam);
                         }));
                       },
                       child: Image.asset(
-                        'assets/images/study.png',
+                        'assets/images/test.png',
                         width: imageWidth,
                       ),
                     ),
                     Text(
-                      'ตารางเรียน',
+                      'คลังข้อสอบเก่า',
                       style: TextStyle(
                         fontFamily: fontFam,
                         fontWeight: FontWeight.bold,
@@ -97,53 +106,46 @@ class HomePagetState extends State<HomePage> {
                       ),
                     )
                   ],
-                )),
-            Container(
-              padding: EdgeInsets.all(eachPadding),
-              child: Column(
-                children: <Widget>[
-                  FlatButton(
-                    onPressed: () {
-                      print('You click calendar');
-
-                      //Create Route to calendara.dart
-
-                      MaterialPageRoute materialPageRoute = MaterialPageRoute(
-                          builder: (BuildContext buildContext) {
-                        return CalendaraPage();
-                      });
-                      Navigator.of(context).push(materialPageRoute);
-                    },
-                    child: Image.asset(
-                      'assets/images/calendar.png',
-                      width: imageWidth,
-                    ),
-                  ),
-                  Text(
-                    'ปฏิทิน',
-                    style: TextStyle(
-                      fontFamily: fontFam,
-                      fontWeight: FontWeight.bold,
-                      fontSize: fontSizeButt,
-                      color: PrimaryColor,
-                    ),
-                  )
-                ],
+                ),
               ),
-            ),
-            Container(
+              Container(
+                padding: EdgeInsets.all(eachPadding),
+                child: Column(
+                  children: <Widget>[
+                    FlatButton(
+                      onPressed: () => {
+                        this.checkLogin() && this.onPressMenuOnline(context)
+                      },
+                      child: Image.asset(
+                        'assets/images/service.png',
+                        width: imageWidth,
+                      ),
+                    ),
+                    Text(
+                      'บริการออนไลน์',
+                      style: TextStyle(
+                        fontFamily: fontFam,
+                        fontWeight: FontWeight.bold,
+                        fontSize: fontSizeButt,
+                        color: PrimaryColor,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Container(
                 padding: EdgeInsets.all(eachPadding),
                 child: Column(
                   children: <Widget>[
                     FlatButton(
                       onPressed: () {},
                       child: Image.asset(
-                        'assets/images/web.png',
+                        'assets/images/load.png',
                         width: imageWidth,
                       ),
                     ),
                     Text(
-                      'เว็บไซต์',
+                      'ดาวน์โหลด',
                       style: TextStyle(
                         fontFamily: fontFam,
                         fontWeight: FontWeight.bold,
@@ -152,227 +154,273 @@ class HomePagetState extends State<HomePage> {
                       ),
                     )
                   ],
-                ))
-          ]),
-          TableRow(children: [
-            Container(
-                padding: EdgeInsets.all(eachPadding),
-                child: Column(
-                  children: <Widget>[
-                    FlatButton(
-                      onPressed: () {},
-                      child: Image.asset(
-                        'assets/images/vr.png',
-                        width: imageWidth,
-                      ),
-                    ),
-                    Text(
-                      'วิชาที่เปิดสอน',
-                      style: TextStyle(
-                        fontFamily: fontFam,
-                        fontWeight: FontWeight.bold,
-                        fontSize: fontSizeButt,
-                        color: PrimaryColor,
-                      ),
-                    )
-                  ],
-                )),
-            Container(
-              padding: EdgeInsets.all(eachPadding),
-              child: Column(
-                children: <Widget>[
-                  FlatButton(
-                    onPressed: () {},
-                    child: Image.asset(
-                      'assets/images/prof.png',
-                      width: imageWidth,
-                    ),
-                  ),
-                  Text(
-                    'บุคลากร',
-                    style: TextStyle(
-                      fontFamily: fontFam,
-                      fontWeight: FontWeight.bold,
-                      fontSize: fontSizeButt,
-                      color: PrimaryColor,
-                    ),
-                  )
-                ],
+                ),
+              )
+            ])
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container myMap() {
+    return Container(
+        padding: EdgeInsets.all(eachPadding),
+        child: Column(
+          children: <Widget>[
+            FlatButton(
+              onPressed: () {},
+              child: Image.asset(
+                'assets/images/map.png',
+                width: imageWidth,
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(eachPadding),
-              child: Column(
-                children: <Widget>[
-                  FlatButton(
-                    onPressed: () {},
-                    child: Image.asset(
-                      'assets/images/room.png',
-                      width: imageWidth,
-                    ),
-                  ),
-                  Text(
-                    'ห้องเรียน',
-                    style: TextStyle(
-                      fontFamily: fontFam,
-                      fontWeight: FontWeight.bold,
-                      fontSize: fontSizeButt,
-                      color: PrimaryColor,
-                    ),
-                  )
-                ],
+            Text(
+              'แผนที่',
+              style: TextStyle(
+                fontFamily: fontFam,
+                fontWeight: FontWeight.bold,
+                fontSize: fontSizeButt,
+                color: PrimaryColor,
               ),
             )
-          ]),
-          TableRow(children: [
-            Container(
-              padding: EdgeInsets.all(eachPadding),
-              child: Column(
-                children: <Widget>[
-                  FlatButton(
-                    onPressed: () {},
-                    child: Image.asset(
-                      'assets/images/work.png',
-                      width: imageWidth,
-                    ),
-                  ),
-                  Text(
-                    'ผลงาน',
-                    style: TextStyle(
-                      fontFamily: fontFam,
-                      fontWeight: FontWeight.bold,
-                      fontSize: fontSizeButt,
-                      color: PrimaryColor,
-                    ),
-                  )
-                ],
-              ),
+          ],
+        ));
+  }
+
+  Container dataGraph() {
+    return Container(
+      padding: EdgeInsets.all(eachPadding),
+      child: Column(
+        children: <Widget>[
+          FlatButton(
+            onPressed: () {},
+            child: Image.asset(
+              'assets/images/data.png',
+              width: imageWidth,
             ),
-            Container(
-              padding: EdgeInsets.all(eachPadding),
-              child: Column(
-                children: <Widget>[
-                  FlatButton(
-                    onPressed: () {},
-                    child: Image.asset(
-                      'assets/images/data.png',
-                      width: imageWidth,
-                    ),
-                  ),
-                  Text(
-                    'ข้อมูลแขนง',
-                    style: TextStyle(
-                      fontFamily: fontFam,
-                      fontWeight: FontWeight.bold,
-                      fontSize: fontSizeButt,
-                      color: PrimaryColor,
-                    ),
-                  )
-                ],
-              ),
+          ),
+          Text(
+            'ข้อมูลแขนง',
+            style: TextStyle(
+              fontFamily: fontFam,
+              fontWeight: FontWeight.bold,
+              fontSize: fontSizeButt,
+              color: PrimaryColor,
             ),
-            Container(
-                padding: EdgeInsets.all(eachPadding),
-                child: Column(
-                  children: <Widget>[
-                    FlatButton(
-                      onPressed: () {},
-                      child: Image.asset(
-                        'assets/images/map.png',
-                        width: imageWidth,
-                      ),
-                    ),
-                    Text(
-                      'แผนที่',
-                      style: TextStyle(
-                        fontFamily: fontFam,
-                        fontWeight: FontWeight.bold,
-                        fontSize: fontSizeButt,
-                        color: PrimaryColor,
-                      ),
-                    )
-                  ],
-                ))
-          ]),
-          TableRow(children: [
-            Container(
-              padding: EdgeInsets.all(eachPadding),
-              child: Column(
-                children: <Widget>[
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute<Null>(
-                          builder: (BuildContext context) {
-                        return new WebViewScreen(urlString: urlExam);
-                      }));
-                    },
-                    child: Image.asset(
-                      'assets/images/test.png',
-                      width: imageWidth,
-                    ),
-                  ),
-                  Text(
-                    'คลังข้อสอบเก่า',
-                    style: TextStyle(
-                      fontFamily: fontFam,
-                      fontWeight: FontWeight.bold,
-                      fontSize: fontSizeButt,
-                      color: PrimaryColor,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(eachPadding),
-              child: Column(
-                children: <Widget>[
-                  FlatButton(
-                    onPressed: () =>
-                        {this.checkLogin() && this.onPressMenuOnline(context)},
-                    child: Image.asset(
-                      'assets/images/service.png',
-                      width: imageWidth,
-                    ),
-                  ),
-                  Text(
-                    'บริการออนไลน์',
-                    style: TextStyle(
-                      fontFamily: fontFam,
-                      fontWeight: FontWeight.bold,
-                      fontSize: fontSizeButt,
-                      color: PrimaryColor,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(eachPadding),
-              child: Column(
-                children: <Widget>[
-                  FlatButton(
-                    onPressed: () {},
-                    child: Image.asset(
-                      'assets/images/load.png',
-                      width: imageWidth,
-                    ),
-                  ),
-                  Text(
-                    'ดาวน์โหลด',
-                    style: TextStyle(
-                      fontFamily: fontFam,
-                      fontWeight: FontWeight.bold,
-                      fontSize: fontSizeButt,
-                      color: PrimaryColor,
-                    ),
-                  )
-                ],
-              ),
-            )
-          ])
+          )
         ],
       ),
-    ));
+    );
+  }
+
+  Container jobStudent() {
+    return Container(
+      padding: EdgeInsets.all(eachPadding),
+      child: Column(
+        children: <Widget>[
+          FlatButton(
+            onPressed: () {
+              MaterialPageRoute route =
+                  MaterialPageRoute(builder: (BuildContext context) {
+                return WorkPage();
+              });
+              Navigator.of(context).push(route);
+            },
+            child: Image.asset(
+              'assets/images/work.png',
+              width: imageWidth,
+            ),
+          ),
+          Text(
+            'ผลงาน',
+            style: TextStyle(
+              fontFamily: fontFam,
+              fontWeight: FontWeight.bold,
+              fontSize: fontSizeButt,
+              color: PrimaryColor,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Container classRoom() {
+    return Container(
+      padding: EdgeInsets.all(eachPadding),
+      child: Column(
+        children: <Widget>[
+          FlatButton(
+            onPressed: () {},
+            child: Image.asset(
+              'assets/images/room.png',
+              width: imageWidth,
+            ),
+          ),
+          Text(
+            'ห้องเรียน',
+            style: TextStyle(
+              fontFamily: fontFam,
+              fontWeight: FontWeight.bold,
+              fontSize: fontSizeButt,
+              color: PrimaryColor,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Container officer() {
+    return Container(
+      padding: EdgeInsets.all(eachPadding),
+      child: Column(
+        children: <Widget>[
+          FlatButton(
+            onPressed: () {},
+            child: Image.asset(
+              'assets/images/prof.png',
+              width: imageWidth,
+            ),
+          ),
+          Text(
+            'บุคลากร',
+            style: TextStyle(
+              fontFamily: fontFam,
+              fontWeight: FontWeight.bold,
+              fontSize: fontSizeButt,
+              color: PrimaryColor,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Container subjectTeching() {
+    return Container(
+        padding: EdgeInsets.all(eachPadding),
+        child: Column(
+          children: <Widget>[
+            FlatButton(
+              onPressed: () {},
+              child: Image.asset(
+                'assets/images/vr.png',
+                width: imageWidth,
+              ),
+            ),
+            Text(
+              'วิชาที่เปิดสอน',
+              style: TextStyle(
+                fontFamily: fontFam,
+                fontWeight: FontWeight.bold,
+                fontSize: fontSizeButt,
+                color: PrimaryColor,
+              ),
+            )
+          ],
+        ));
+  }
+
+  Container myWebsite() {
+    return Container(
+        padding: EdgeInsets.all(eachPadding),
+        child: Column(
+          children: <Widget>[
+            FlatButton(
+              onPressed: () {
+                MaterialPageRoute route =
+                    MaterialPageRoute(builder: (BuildContext context) {
+                  return WebPage();
+                });
+                Navigator.of(context).push(route);
+              },
+              child: Image.asset(
+                'assets/images/web.png',
+                width: imageWidth,
+              ),
+            ),
+            Text(
+              'เว็บไซต์',
+              style: TextStyle(
+                fontFamily: fontFam,
+                fontWeight: FontWeight.bold,
+                fontSize: fontSizeButt,
+                color: PrimaryColor,
+              ),
+            )
+          ],
+        ));
+  }
+
+  Container myCalendar(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(eachPadding),
+      child: Column(
+        children: <Widget>[
+          FlatButton(
+            onPressed: () {
+              print('You click calendar');
+
+              //Create Route to calendara.dart
+
+              MaterialPageRoute materialPageRoute =
+                  MaterialPageRoute(builder: (BuildContext buildContext) {
+                return CalendaraPage();
+              });
+              Navigator.of(context).push(materialPageRoute);
+            },
+            child: Image.asset(
+              'assets/images/calendar.png',
+              width: imageWidth,
+            ),
+          ),
+          Text(
+            'ปฏิทิน',
+            style: TextStyle(
+              fontFamily: fontFam,
+              fontWeight: FontWeight.bold,
+              fontSize: fontSizeButt,
+              color: PrimaryColor,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Container tableLearning(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(eachPadding),
+      child: Column(
+        children: <Widget>[
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute<Null>(builder: (BuildContext context) {
+                return new WebViewScreen(
+                  urlString: urlSche,
+                  titleString: 'เว็บไซต์',
+                );
+              }));
+            },
+            child: Image.asset(
+              'assets/images/study.png',
+              width: imageWidth,
+            ),
+          ),
+          Text(
+            'ตารางเรียน',
+            style: TextStyle(
+              fontFamily: fontFam,
+              fontWeight: FontWeight.bold,
+              fontSize: fontSizeButt,
+              color: PrimaryColor,
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
