@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:enetb/FirstScreen.dart';
 import 'package:enetb/notipage.dart';
@@ -12,35 +13,72 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+//  Field
 
   int currentIndex = 0;
   List pages = [HomePage(), NewsPage(), QrPage(), FirstScreen(), JobPage()];
+  FirebaseMessaging firebaseMessaging = FirebaseMessaging();
+
+  //Method
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    findToken();
+//    receiveNotification();
+  }
+
+  Future<void> findToken()async{
+    await firebaseMessaging.getToken().then((response){
+      print('Token ===>>> ${response.toString()}');
+    });
+  }
+
+  Future<void> receiveNotification() async {
+//    firebaseMessaging.configure(
+//      onLaunch: (Map<String, dynamic> map) {
+//        print('onLaunch => $map');
+//      },
+//    );
+  }
 
   @override
   Widget build(BuildContext context) {
-
-    Widget appBar = AppBar(title: Text('EnetB App'),
+    Widget appBar = AppBar(
+      title: Text('EnetB App'),
       backgroundColor: Colors.deepOrange,
       actions: <Widget>[
-        IconButton(icon: Icon(Icons.notifications_none),color: Colors.black, onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context)=> NotiPage()));
-        }
-        )
+        IconButton(
+            icon: Icon(Icons.notifications_none),
+            color: Colors.black,
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => NotiPage()));
+            })
       ],
     );
     Widget bottomNavBar = BottomNavigationBar(
         currentIndex: currentIndex,
-        onTap: (int index){
+        onTap: (int index) {
           setState(() {
-            currentIndex = index;});},
+            currentIndex = index;
+          });
+        },
         backgroundColor: Colors.grey,
         unselectedItemColor: Colors.black,
         selectedItemColor: Colors.deepOrange,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.apps), title: Text('หน้าหลัก')),
-          BottomNavigationBarItem(icon: Icon(Icons.description), title: Text('ข่าวสาร')),
-          BottomNavigationBarItem(icon: Icon(Icons.camera_alt), title: Text('QR Scan')),
-          BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('เข้าสู่ระบบ')),
-          BottomNavigationBarItem(icon: Icon(Icons.assignment_late), title: Text('งาน')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.apps), title: Text('หน้าหลัก')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.description), title: Text('ข่าวสาร')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.camera_alt), title: Text('QR Scan')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person), title: Text('เข้าสู่ระบบ')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.assignment_late), title: Text('งาน')),
         ]);
     return Scaffold(
       appBar: appBar,
