@@ -1,5 +1,6 @@
 import 'file:///C:/Users/Supanneew/Desktop/flutter_app-master/flutter_app-master/lib/MenuOnlineScreen.dart';
 import 'package:enetb/calendara.dart';
+import 'package:enetb/mappage.dart';
 import 'package:enetb/webpage.dart';
 import 'package:enetb/workpage.dart';
 import 'package:flutter/material.dart';
@@ -169,7 +170,12 @@ class HomePagetState extends State<HomePage> {
         child: Column(
           children: <Widget>[
             FlatButton(
-              onPressed: () {},
+              onPressed: () {
+
+                MaterialPageRoute route = MaterialPageRoute(builder: (BuildContext context){return MapPage();});
+                Navigator.of(context).push(route);
+
+              },
               child: Image.asset(
                 'assets/images/map.png',
                 width: imageWidth,
