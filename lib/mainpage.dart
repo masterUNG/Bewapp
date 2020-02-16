@@ -1,3 +1,4 @@
+import 'package:enetb/screens/show_notification.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:enetb/FirstScreen.dart';
@@ -26,21 +27,40 @@ class _MainPageState extends State<MainPage> {
     super.initState();
 
     findToken();
-//    receiveNotification();
+    receiveNotification();
   }
 
-  Future<void> findToken()async{
-    await firebaseMessaging.getToken().then((response){
+  Future<void> findToken() async {
+    await firebaseMessaging.getToken().then((response) {
       print('Token ===>>> ${response.toString()}');
     });
   }
 
   Future<void> receiveNotification() async {
-//    firebaseMessaging.configure(
-//      onLaunch: (Map<String, dynamic> map) {
-//        print('onLaunch => $map');
-//      },
-//    );
+    firebaseMessaging.configure(
+      onLaunch: (Map<String, dynamic> map) {
+        print('onLanch ==> $map');
+      }, onMessage: (Map<String, dynamic> map){
+        print('onMessage ===> $map');
+        fromOnMessage(map);
+    },onResume: (Map<String, dynamic> map){
+        print('onResume ===> $map');
+    },
+    );
+  }
+
+  Future<void> fromOnMessage(Map<String, dynamic> map)async{
+    var result = map['notification'];
+    print('result = $result');
+
+    Map<dynamic, dynamic> myMap = result;
+    String title = myMap['title'];
+    String message = myMap['body'];
+
+    MaterialPageRoute route = MaterialPageRoute(builder: (BuildContext buildContext){
+      return ShowNotification(title: title, message: message,);
+    });
+    Navigator.of(context).push(route);
   }
 
   @override
