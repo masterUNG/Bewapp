@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:enetb/models/job_model.dart';
+import 'package:enetb/utility/my_style.dart';
 import 'package:flutter/material.dart';
 
 class ListVideo extends StatefulWidget {
@@ -18,6 +19,7 @@ class _ListVideoState extends State<ListVideo> {
   String myCategory;
 
   List<JobModel> jobModels = List();
+  List<String> titles = ['สื่อมัลติมีเดีย','สื่อโปรดักชัน','สื่อเทคโนโลยีความเป็นจริงเสมือน','โปสเตอร์',];
 
 //Method
   @override
@@ -51,23 +53,64 @@ class _ListVideoState extends State<ListVideo> {
 
   Widget showImage(int index) {
     return Container(
+      padding: EdgeInsets.all(10.0),
       width: MediaQuery.of(context).size.width,
       height: 150.0,
       child: Image.network(jobModels[index].pathImage),
     );
   }
 
+  Widget showTitle(int index) {
+    return Container(margin: EdgeInsets.only(left: 30.0),
+      child: Row(
+        children: <Widget>[
+          Text(
+            jobModels[index].name,
+            style: MyStyle().titleH1,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget showYear(int index) {
+    return Container(margin: EdgeInsets.only(left: 30.0),
+      child: Row(
+        children: <Widget>[
+          Text(
+            jobModels[index].year,
+            style: MyStyle().titleH2,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget showTitleAppbar(){
+    int i = int.parse(myCategory);
+    return Text(titles[i]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(title: showTitleAppbar(),),
       body: ListView.builder(
+//        padding: EdgeInsets.only(
+//          left: 30.0,
+//          right: 30.0,
+//        ),
         itemCount: jobModels.length,
         itemBuilder: (BuildContext buildContext, int index) {
-          return Column(
-            children: <Widget>[
-              showImage(index),
-            ],
+          return Container(
+            decoration: BoxDecoration(color: index%2 == 0 ? Colors.grey : Colors.grey.shade300 ),
+            child: Column(
+              children: <Widget>[
+                showImage(index),
+                showTitle(index),
+                showYear(index),
+              ],
+            ),
           );
         },
       ),
