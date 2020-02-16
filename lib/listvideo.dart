@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:enetb/models/job_model.dart';
+import 'package:enetb/screens/play_video.dart';
 import 'package:enetb/utility/my_style.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,12 @@ class _ListVideoState extends State<ListVideo> {
   String myCategory;
 
   List<JobModel> jobModels = List();
-  List<String> titles = ['สื่อมัลติมีเดีย','สื่อโปรดักชัน','สื่อเทคโนโลยีความเป็นจริงเสมือน','โปสเตอร์',];
+  List<String> titles = [
+    'สื่อมัลติมีเดีย',
+    'สื่อโปรดักชัน',
+    'สื่อเทคโนโลยีความเป็นจริงเสมือน',
+    'โปสเตอร์',
+  ];
 
 //Method
   @override
@@ -61,7 +67,8 @@ class _ListVideoState extends State<ListVideo> {
   }
 
   Widget showTitle(int index) {
-    return Container(margin: EdgeInsets.only(left: 30.0),
+    return Container(
+      margin: EdgeInsets.only(left: 30.0),
       child: Row(
         children: <Widget>[
           Text(
@@ -74,7 +81,8 @@ class _ListVideoState extends State<ListVideo> {
   }
 
   Widget showYear(int index) {
-    return Container(margin: EdgeInsets.only(left: 30.0),
+    return Container(
+      margin: EdgeInsets.only(left: 30.0),
       child: Row(
         children: <Widget>[
           Text(
@@ -86,7 +94,7 @@ class _ListVideoState extends State<ListVideo> {
     );
   }
 
-  Widget showTitleAppbar(){
+  Widget showTitleAppbar() {
     int i = int.parse(myCategory);
     return Text(titles[i]);
   }
@@ -94,7 +102,9 @@ class _ListVideoState extends State<ListVideo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: showTitleAppbar(),),
+      appBar: AppBar(
+        title: showTitleAppbar(),
+      ),
       body: ListView.builder(
 //        padding: EdgeInsets.only(
 //          left: 30.0,
@@ -102,14 +112,26 @@ class _ListVideoState extends State<ListVideo> {
 //        ),
         itemCount: jobModels.length,
         itemBuilder: (BuildContext buildContext, int index) {
-          return Container(
-            decoration: BoxDecoration(color: index%2 == 0 ? Colors.grey : Colors.grey.shade300 ),
-            child: Column(
-              children: <Widget>[
-                showImage(index),
-                showTitle(index),
-                showYear(index),
-              ],
+          return GestureDetector(
+            onTap: () {
+              MaterialPageRoute materialPageRoute =
+                  MaterialPageRoute(builder: (BuildContext buildContext) {
+                return PlayVideo(
+                  jobModel: jobModels[index],
+                );
+              });
+              Navigator.of(context).push(materialPageRoute);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                  color: index % 2 == 0 ? Colors.grey : Colors.grey.shade300),
+              child: Column(
+                children: <Widget>[
+                  showImage(index),
+                  showTitle(index),
+                  showYear(index),
+                ],
+              ),
             ),
           );
         },
