@@ -3,14 +3,19 @@ import 'package:enetb/RegisterTeacher.dart';
 import 'package:enetb/LoginScreen.dart';
 import 'package:enetb/RegisterStudent.dart';
 
+const PrimaryColor = const Color(0xFFFF6B00);
+String fontFam = 'Quark';
+
 // render buttons
 class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
-
+    return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(title: Text('บริการออนไลน์',
+          style: TextStyle(
+            fontFamily: fontFam,fontWeight: FontWeight.bold,
+            fontSize: 25,),),centerTitle: true, backgroundColor: PrimaryColor,),
         body: SingleChildScrollView(
           child: Center(
 
@@ -19,7 +24,7 @@ class FirstScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 100, 0, 15),
+                  margin: EdgeInsets.fromLTRB(0, 50, 0, 15),
                   height: 160.00,
                   width: 300.00,
                   decoration: BoxDecoration(
@@ -40,7 +45,9 @@ class FirstScreen extends StatelessWidget {
                       color: Color(0xffee6200),
                       textColor: Colors.white,
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      child: Text('เข้าใช้งานสำหรับบุคลากร'),
+                      child: Text('เข้าใช้งานสำหรับบุคลากร',
+                        style: TextStyle(
+                          fontFamily: fontFam,fontSize: 20, fontWeight: FontWeight.bold,), ),
                       onPressed: () {
                         Navigator.of(context)
                             .push(MaterialPageRoute<Null>(builder: (BuildContext context) { return new LoginUserTeacher();
@@ -61,7 +68,9 @@ class FirstScreen extends StatelessWidget {
                       color: Color(0xfffe0000),
                       textColor: Colors.white,
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      child: Text('เข้าใช้งานสำหรับนักศึกษา'),
+                      child: Text('เข้าใช้งานสำหรับนักศึกษา',
+                        style: TextStyle(
+                          fontFamily: fontFam,fontSize: 20, fontWeight: FontWeight.bold,),),
                       onPressed: () {
                         Navigator.of(context)
                             .push(MaterialPageRoute<Null>(builder: (BuildContext context) { return new LoginUserStudent();
@@ -82,7 +91,9 @@ class FirstScreen extends StatelessWidget {
                       color: Color(0xffee6200),
                       textColor: Colors.white,
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      child: Text('ลงทะเบียนสำหรับบุคลากร'),
+                      child: Text('ลงทะเบียนสำหรับบุคลากร',
+                        style: TextStyle(
+                          fontFamily: fontFam,fontSize: 20, fontWeight: FontWeight.bold,),),
                       onPressed: () {
                         Navigator.of(context)
                             .push(MaterialPageRoute<Null>(builder: (BuildContext context) { return new RegisterTeacher();
@@ -103,7 +114,9 @@ class FirstScreen extends StatelessWidget {
                       color: Color(0xfffe0000),
                       textColor: Colors.white,
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      child: Text('ลงทะเบียนสำหรับนักศึกษา'),
+                      child: Text('ลงทะเบียนสำหรับนักศึกษา',
+                        style: TextStyle(
+                          fontFamily: fontFam,fontSize: 20, fontWeight: FontWeight.bold,),),
                       onPressed: () {
                         Navigator.of(context)
                             .push(MaterialPageRoute<Null>(builder: (BuildContext context) { return new RegisterStudent();
@@ -118,7 +131,6 @@ class FirstScreen extends StatelessWidget {
             ),
           ),
         ),
-      ),
     );
   }
 }

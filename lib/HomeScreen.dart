@@ -1,19 +1,35 @@
 import 'package:enetb/MenuOnlineScreen.dart';
+import 'package:enetb/listnews.dart';
+import 'package:enetb/personpage.dart';
+import 'package:enetb/qrpage.dart';
+import 'package:enetb/roompage.dart';
+import 'package:enetb/subpage.dart';
+import 'package:enetb/webpage.dart';
+import 'package:enetb/workpage.dart';
 import 'package:flutter/material.dart';
 import 'package:enetb/FirstScreen.dart';
 import 'package:enetb/ProfileScreen.dart';
+import 'package:enetb/calendara.dart';
+import 'package:enetb/manualpage.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'datapage.dart';
+import 'loadpage.dart';
+import 'mappage.dart';
 
 
 const PrimaryColor = const Color(0xFFFF6B00);
 double mainPadding = 10.0;
 double eachPadding = 5.0;
-double imageWidth = 80;
-double fontSizeButt = 14;
+double imageWidth = 115;
+double fontSizeButt = 16;
 String fontFam = 'Quark';
 
-
+String urlSche =
+    "http://klogic.kmutnb.ac.th:8080/kris/tess/dataQuerySelector.jsp?query=studentTab";
+String urlExam = "http://cit.kmutnb.ac.th/examination/";
 
 class HomeScreen extends StatefulWidget {
+
   HomeScreen({
     @required this.userId,
     @required this.type,
@@ -28,6 +44,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreentState extends State<HomeScreen> {
+
+  int currentIndex = 0;
+  List pages = [HomeScreen(), ListNews(), QrPage(), FirstScreen(), ManualPage()];
+  FirebaseMessaging firebaseMessaging = FirebaseMessaging();
 
   HomeScreentState(this.userId, this.type);  //constructor
   final userId;
@@ -64,6 +84,30 @@ class HomeScreentState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    Widget bottomNavBar = BottomNavigationBar(
+        currentIndex: currentIndex,
+        onTap: (int index) {
+          setState(() {
+            currentIndex = index;
+          });
+        },
+        backgroundColor: Colors.grey,
+        unselectedItemColor: Colors.black,
+        selectedItemColor: Colors.deepOrange,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.apps), title: Text('หน้าหลัก')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.description), title: Text('ข่าวสาร')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.camera_alt), title: Text('QR Scan')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person), title: Text('เข้าสู่ระบบ')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.book), title: Text('คู่มือการใช้งาน')),
+        ]);
+
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -72,7 +116,7 @@ class HomeScreentState extends State<HomeScreen> {
             style: TextStyle(
 
               fontFamily: fontFam,fontWeight: FontWeight.bold,
-              fontSize: 20,
+              fontSize: 25,
 
             ),
           ),
@@ -91,6 +135,8 @@ class HomeScreentState extends State<HomeScreen> {
           backgroundColor: PrimaryColor,
         ),
 
+        bottomNavigationBar: bottomNavBar,
+
         body: Container(
           margin: EdgeInsets.fromLTRB(5.0,30.0,10.0,5.0),
           padding: EdgeInsets.all(mainPadding),
@@ -102,7 +148,15 @@ class HomeScreentState extends State<HomeScreen> {
                         padding: EdgeInsets.all(eachPadding),
                         child: Column(
                           children:<Widget>[
-                            FlatButton(onPressed: () {}, child: Image.asset('assets/images/study.png',width: imageWidth,),),
+                            FlatButton(onPressed: () {
+                              Navigator.of(context).push(
+                                  MaterialPageRoute<Null>(builder: (BuildContext context) {
+                                    return new WebViewScreen(
+                                      urlString: urlSche,
+                                      titleString: 'ตารางเรียน',
+                                    );
+                                  }));
+                            }, child: Image.asset('assets/images/study.png',width: imageWidth,),),
                             Text('ตารางเรียน' ,
                               style: TextStyle(
                                 fontFamily: fontFam,fontWeight: FontWeight.bold,
@@ -119,7 +173,13 @@ class HomeScreentState extends State<HomeScreen> {
                         padding: EdgeInsets.all(eachPadding),
                         child: Column(
                           children: <Widget>[
-                            FlatButton(onPressed: () {}, child: Image.asset('assets/images/calendar.png',width: imageWidth,),),
+                            FlatButton(onPressed: () {
+                              MaterialPageRoute materialPageRoute =
+                              MaterialPageRoute(builder: (BuildContext buildContext) {
+                                return CalendaraPage();
+                              });
+                              Navigator.of(context).push(materialPageRoute);
+                            }, child: Image.asset('assets/images/calendar.png',width: imageWidth,),),
                             Text('ปฏิทิน' ,
                               style: TextStyle(
                                 fontFamily: fontFam,fontWeight: FontWeight.bold,
@@ -133,7 +193,13 @@ class HomeScreentState extends State<HomeScreen> {
                         padding: EdgeInsets.all(eachPadding),
                         child: Column(
                           children: <Widget>[
-                            FlatButton(onPressed: () {}, child: Image.asset('assets/images/web.png',width: imageWidth,),),
+                            FlatButton(onPressed: () {
+                              MaterialPageRoute route =
+                              MaterialPageRoute(builder: (BuildContext context) {
+                                return WebPage();
+                              });
+                              Navigator.of(context).push(route);
+                            }, child: Image.asset('assets/images/web.png',width: imageWidth,),),
                             Text('เว็บไซต์' ,
                               style: TextStyle(
                                 fontFamily: fontFam,fontWeight: FontWeight.bold,
@@ -152,7 +218,10 @@ class HomeScreentState extends State<HomeScreen> {
                         padding: EdgeInsets.all(eachPadding),
                         child: Column(
                           children: <Widget>[
-                            FlatButton(onPressed: () {}, child: Image.asset('assets/images/vr.png',width: imageWidth,),),
+                            FlatButton(onPressed: () {
+                              MaterialPageRoute route = MaterialPageRoute(builder: (BuildContext context){return SubPage();});
+                              Navigator.of(context).push(route);
+                            }, child: Image.asset('assets/images/vr.png',width: imageWidth,),),
                             Text('วิชาที่เปิดสอน' ,
                               style: TextStyle(
                                 fontFamily: fontFam,fontWeight: FontWeight.bold,
@@ -166,7 +235,9 @@ class HomeScreentState extends State<HomeScreen> {
                       padding: EdgeInsets.all(eachPadding),
                       child: Column(
                         children: <Widget>[
-                          FlatButton(onPressed: () {}, child: Image.asset('assets/images/prof.png',width: imageWidth,),),
+                          FlatButton(onPressed: () {MaterialPageRoute route = MaterialPageRoute(builder: (BuildContext context){return PersonPage();});
+                          Navigator.of(context).push(route);
+                          }, child: Image.asset('assets/images/prof.png',width: imageWidth,),),
                           Text('บุคลากร' ,
                             style: TextStyle(
                               fontFamily: fontFam,fontWeight: FontWeight.bold,
@@ -180,7 +251,10 @@ class HomeScreentState extends State<HomeScreen> {
                       padding: EdgeInsets.all(eachPadding),
                       child: Column(
                         children: <Widget>[
-                          FlatButton(onPressed: () {}, child: Image.asset('assets/images/room.png',width: imageWidth,),),
+                          FlatButton(onPressed: () {
+                            MaterialPageRoute route = MaterialPageRoute(builder: (BuildContext context){return RoomPage();});
+                            Navigator.of(context).push(route);
+                          }, child: Image.asset('assets/images/room.png',width: imageWidth,),),
                           Text('ห้องเรียน' ,
                             style: TextStyle(
                               fontFamily: fontFam,fontWeight: FontWeight.bold,
@@ -199,7 +273,13 @@ class HomeScreentState extends State<HomeScreen> {
                       padding: EdgeInsets.all(eachPadding),
                       child: Column(
                         children: <Widget>[
-                          FlatButton(onPressed: () {}, child: Image.asset('assets/images/work.png',width: imageWidth,),),
+                          FlatButton(onPressed: () {
+                            MaterialPageRoute route =
+                            MaterialPageRoute(builder: (BuildContext context) {
+                              return WorkPage();
+                            });
+                            Navigator.of(context).push(route);
+                          }, child: Image.asset('assets/images/work.png',width: imageWidth,),),
                           Text('ผลงาน' ,
                             style: TextStyle(
                               fontFamily: fontFam,fontWeight: FontWeight.bold,
@@ -213,7 +293,10 @@ class HomeScreentState extends State<HomeScreen> {
                       padding: EdgeInsets.all(eachPadding),
                       child: Column(
                         children: <Widget>[
-                          FlatButton(onPressed: () {}, child: Image.asset('assets/images/data.png',width: imageWidth,),),
+                          FlatButton(onPressed: () {
+                            MaterialPageRoute route = MaterialPageRoute(builder: (BuildContext context){return DataPage();});
+                            Navigator.of(context).push(route);
+                          }, child: Image.asset('assets/images/data.png',width: imageWidth,),),
                           Text('ข้อมูลแขนง' ,
                             style: TextStyle(
                               fontFamily: fontFam,fontWeight: FontWeight.bold,
@@ -227,7 +310,10 @@ class HomeScreentState extends State<HomeScreen> {
                         padding: EdgeInsets.all(eachPadding),
                         child:  Column(
                           children: <Widget>[
-                            FlatButton(onPressed: () {}, child: Image.asset('assets/images/map.png',width: imageWidth,),),
+                            FlatButton(onPressed: () {
+                              MaterialPageRoute route = MaterialPageRoute(builder: (BuildContext context){return MapPage();});
+                              Navigator.of(context).push(route);
+                            }, child: Image.asset('assets/images/map.png',width: imageWidth,),),
                             Text('แผนที่' ,
                               style: TextStyle(
                                 fontFamily: fontFam,fontWeight: FontWeight.bold,
@@ -246,7 +332,15 @@ class HomeScreentState extends State<HomeScreen> {
                       padding: EdgeInsets.all(eachPadding),
                       child: Column(
                         children: <Widget>[
-                          FlatButton(onPressed: () {}, child: Image.asset('assets/images/test.png',width: imageWidth,),),
+                          FlatButton(onPressed: () {
+                            Navigator.of(context).push(
+                                MaterialPageRoute<Null>(builder: (BuildContext context) {
+                                  return new WebViewScreen(
+                                    urlString: urlExam,
+                                    titleString: 'คลังข้อสอบเก่า',
+                                  );
+                                }));
+                          }, child: Image.asset('assets/images/test.png',width: imageWidth,),),
                           Text('คลังข้อสอบเก่า' ,
                             style: TextStyle(
                               fontFamily: fontFam,fontWeight: FontWeight.bold,
@@ -260,7 +354,8 @@ class HomeScreentState extends State<HomeScreen> {
                       padding: EdgeInsets.all(eachPadding),
                       child: Column(
                         children: <Widget>[
-                          FlatButton(onPressed: () => {this.checkLogin() && this.onPressMenuOnline(context)
+                          FlatButton(onPressed: () => {
+                            this.checkLogin() && this.onPressMenuOnline(context)
                           }, child: Image.asset('assets/images/service.png',width: imageWidth,),),
                           Text('บริการออนไลน์' ,
                             style: TextStyle(
@@ -275,7 +370,10 @@ class HomeScreentState extends State<HomeScreen> {
                       padding: EdgeInsets.all(eachPadding),
                       child: Column(
                         children: <Widget>[
-                          FlatButton(onPressed: () {}, child: Image.asset('assets/images/load.png',width: imageWidth,),),
+                          FlatButton(onPressed: () {
+                            MaterialPageRoute route = MaterialPageRoute(builder: (BuildContext context){return LoadPage();});
+                            Navigator.of(context).push(route);
+                          }, child: Image.asset('assets/images/load.png',width: imageWidth,),),
                           Text('ดาวน์โหลด' ,
                             style: TextStyle(
                               fontFamily: fontFam,fontWeight: FontWeight.bold,

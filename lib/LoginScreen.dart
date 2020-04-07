@@ -1,3 +1,4 @@
+import 'package:enetb/mainpage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -6,7 +7,7 @@ import 'package:enetb/HomeScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const PrimaryColor = const Color(0xFFFF6B00);
-
+String fontFam = 'Quark';
 
 class LoginUserStudent extends StatefulWidget {
 
@@ -49,12 +50,15 @@ class LoginUserStudentState extends State {
       'id': id,
       'password': password
     };
+    //print("data" + id);
+    //print("data" + password);
 
     // Starting Web API Call.
     var response = await http.post(url, body: json.encode(data));
     // Getting Server response into variable.
     var message = jsonDecode(response.body);
 
+    //print("messafe res" + message);
     // If Web call Success than Hide the CircularProgressIndicator.
     if (response.statusCode == 200) {
       setState(() {
@@ -109,7 +113,10 @@ class LoginUserStudentState extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('เข้าสู่ระบบสำหรับนักศึกษา'),centerTitle: true,
+        appBar: AppBar(title: Text('เข้าสู่ระบบสำหรับนักศึกษา',
+          style: TextStyle(
+            fontFamily: fontFam,fontWeight: FontWeight.bold,
+            fontSize: 25,),),centerTitle: true,
           backgroundColor: PrimaryColor,),
         backgroundColor: Theme.of(context).accentColor,
         body: SingleChildScrollView(
@@ -301,7 +308,10 @@ class LoginUserTeacherState extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('เข้าสู่ระบบสำหรับบุคลากร'),centerTitle: true,
+        appBar: AppBar(title: Text('เข้าสู่ระบบสำหรับบุคลากร',
+          style: TextStyle(
+            fontFamily: fontFam,fontWeight: FontWeight.bold,
+            fontSize: 20,),),centerTitle: true,
           backgroundColor: PrimaryColor,),
         backgroundColor: Theme.of(context).accentColor,
         body: SingleChildScrollView(

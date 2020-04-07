@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:enetb/models/job_model.dart';
 import 'package:enetb/screens/play_video.dart';

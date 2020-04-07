@@ -1,6 +1,9 @@
 import 'package:enetb/listvideo.dart';
 import 'package:flutter/material.dart';
 
+const PrimaryColor = const Color(0xFFFF6B00);
+String fontFam = 'Quark';
+
 class WorkPage extends StatefulWidget {
   @override
   _WorkPageState createState() => _WorkPageState();
@@ -94,8 +97,11 @@ class _WorkPageState extends State<WorkPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ผลงาน'),
-      ),
+        title: Text('ผลงาน',
+
+          style: TextStyle(fontFamily: fontFam,fontWeight: FontWeight.bold,
+          fontSize: 25,),),centerTitle: true,
+        ),
       body: Container(
         padding: EdgeInsets.only(top: 100.0),
         alignment: Alignment.topCenter,

@@ -1,12 +1,13 @@
+import 'package:enetb/HomeScreen.dart';
+import 'package:enetb/listnews.dart';
 import 'package:enetb/screens/show_notification.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:enetb/FirstScreen.dart';
-import 'package:enetb/notipage.dart';
-import 'package:enetb/jobpage.dart';
+import 'package:enetb/manualpage.dart';
 import 'package:enetb/newspage.dart';
 import 'package:enetb/qrpage.dart';
-import 'package:enetb/homepage.dart';
+
 
 class MainPage extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class _MainPageState extends State<MainPage> {
 //  Field
 
   int currentIndex = 0;
-  List pages = [HomePage(), NewsPage(), QrPage(), FirstScreen(), JobPage()];
+  List pages = [HomeScreen(), ListNews(), QrPage(), FirstScreen(), ManualPage()];
   FirebaseMessaging firebaseMessaging = FirebaseMessaging();
 
   //Method
@@ -65,19 +66,6 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget appBar = AppBar(
-      title: Text('EnetB App'),
-      backgroundColor: Colors.deepOrange,
-      actions: <Widget>[
-        IconButton(
-            icon: Icon(Icons.notifications_none),
-            color: Colors.black,
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => NotiPage()));
-            })
-      ],
-    );
     Widget bottomNavBar = BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (int index) {
@@ -98,10 +86,9 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.person), title: Text('เข้าสู่ระบบ')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.assignment_late), title: Text('งาน')),
+              icon: Icon(Icons.book), title: Text('คู่มือการใช้งาน')),
         ]);
     return Scaffold(
-      appBar: appBar,
       body: pages[currentIndex],
       bottomNavigationBar: bottomNavBar,
     );

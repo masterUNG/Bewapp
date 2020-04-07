@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:enetb/FirstScreen.dart';
 
 const PrimaryColor = const Color(0xFFFF6B00);
-
+String fontFam = 'Quark';
 
 class RegisterTeacher extends StatefulWidget {
   RegisterTeacher() : super();
@@ -178,7 +178,10 @@ class RegisterTeacherState extends State<RegisterTeacher> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('ลงทะเบียนสำหรับบุคลากร'),centerTitle: true, backgroundColor: PrimaryColor
+      appBar: AppBar(title: Text('ลงทะเบียนสำหรับบุคลากร',
+        style: TextStyle(
+          fontFamily: fontFam,fontWeight: FontWeight.bold,
+          fontSize: 25,),),centerTitle: true, backgroundColor: PrimaryColor
       ),
       body:  Container(padding: EdgeInsets.only(top : 50.0, left: 80, right: 80),
           child: SingleChildScrollView(

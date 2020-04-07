@@ -1,5 +1,7 @@
-import 'package:enetb/MenuOnlineScreen.dart';
+
 import 'package:flutter/material.dart';
+
+import 'WebviewScreen.dart';
 
 class CalendaraPage extends StatefulWidget {
   @override
@@ -24,7 +26,8 @@ class _CalendaraPageState extends State<CalendaraPage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30.0),
       ),
-      child: Text('ปฏิทินเพื่อการศึกษา'),
+      child: Text('ปฏิทินเพื่อการศึกษา',
+        style: TextStyle(fontFamily: fontFam, fontSize: 18, fontWeight: FontWeight.bold,),),
       onPressed: () {
         MaterialPageRoute materialPageRoute =
             MaterialPageRoute(builder: (BuildContext buildContext) {
@@ -43,7 +46,9 @@ class _CalendaraPageState extends State<CalendaraPage> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.deepOrange,
-        title: Text('ปฏิทินเพื่อการศึกษา'),
+        title: Text('ปฏิทินเพื่อการศึกษา',
+          style: TextStyle(fontFamily: fontFam,fontWeight: FontWeight.bold,
+            fontSize: 25,),),centerTitle: true,
       ),
       body: Container(
         decoration: BoxDecoration(color: Colors.deepOrange),

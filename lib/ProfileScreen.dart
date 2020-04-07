@@ -121,11 +121,11 @@ class ProfileScreenState extends State<ProfileStudentScreen> {
         appBar: AppBar(
           title: Text(
 
-            'โปรไฟล์',
+            'ข้อมูลส่วนตัว',
             style: TextStyle(
 
               fontFamily: fontFam,fontWeight: FontWeight.bold,
-              fontSize: 20,
+              fontSize: 25,
 
             ),
           ),

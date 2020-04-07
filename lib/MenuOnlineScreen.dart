@@ -6,6 +6,7 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 const PrimaryColor = const Color(0xFFFF6B00);
+      String fontFam = 'Quark';
 
 
 class MenuOnlineScreenStudent extends StatelessWidget {
@@ -20,7 +21,10 @@ class MenuOnlineScreenStudent extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('เมนูออนไลน์สำหรับนักศึกษา'),centerTitle: true, backgroundColor: PrimaryColor,),
+        appBar: AppBar(title: Text('เมนูออนไลน์สำหรับนักศึกษา',
+          style: TextStyle(
+          fontFamily: fontFam,fontWeight: FontWeight.bold,
+          fontSize: 25,),),centerTitle: true, backgroundColor: PrimaryColor,),
         backgroundColor: Theme.of(context).primaryColor,
         body: Center(
           child: Center(
@@ -39,12 +43,16 @@ class MenuOnlineScreenStudent extends StatelessWidget {
                       color: Color(0xffee6200),
                       textColor: Colors.white,
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      child: Text('ลงทะเบียน'),
+                      child: Text('ลงทะเบียน',
+                        style: TextStyle(fontFamily: fontFam,),),
                       onPressed: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
-                          return new WebViewScreen(urlString :  urlRegis);
-                        }));
+                        Navigator.of(context).push(
+                            MaterialPageRoute<Null>(builder: (BuildContext context) {
+                              return new WebViewScreen(
+                                urlString: urlRegis,
+                                titleString: 'ลงทะเบียน',
+                              );
+                            }));
 
                       },
                     ),
@@ -62,12 +70,16 @@ class MenuOnlineScreenStudent extends StatelessWidget {
                       color: Color(0xfffe0000),
                       textColor: Colors.white,
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      child: Text('ประเมินอาจารย์'),
+                      child: Text('ประเมินการสอน',
+                        style: TextStyle(fontFamily: fontFam,),),
                       onPressed: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
-                          return new WebViewScreen(urlString :  urlTeach);
-                        }));
+                        Navigator.of(context).push(
+                            MaterialPageRoute<Null>(builder: (BuildContext context) {
+                              return new WebViewScreen(
+                                urlString: urlTeach,
+                                titleString: 'ประเมินการสอน',
+                              );
+                            }));
                       },
                     ),
                   ),
@@ -96,128 +108,153 @@ class MenuOnlineScreenTeacher extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('เมนูออนไลน์สำหรับบุคลากร'),centerTitle: true, backgroundColor: PrimaryColor),
+        appBar: AppBar(title: Text('เมนูออนไลน์สำหรับบุคลากร',
+          style: TextStyle(fontFamily: fontFam,fontWeight: FontWeight.bold,
+            fontSize: 25,),),centerTitle: true, backgroundColor: PrimaryColor),
         backgroundColor: Theme.of(context).primaryColor,
-        body: Center(
+        body: Container(
+          color: Colors.white,
           child: Center(
+            child: Center(
 
-            child:
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
+              child:
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
 
-                Container(
-                  margin: const EdgeInsets.only(bottom: 20.0),
-                  child : ButtonTheme(
-                    minWidth: 250.0,
-                    height: 50.0,
-                    child:  RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(30.0)),
-                      color: Color(0xffee6200),
-                      textColor: Colors.white,
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      child: Text('ลงทะเบียน'),
-                      onPressed: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
-                          return new WebViewScreen(urlString :  urlRegis);
-                        }));
-                      },
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 20.0),
+                    child : ButtonTheme(
+                      minWidth: 250.0,
+                      height: 50.0,
+                      child:  RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0)),
+                        color: Color(0xffee6200),
+                        textColor: Colors.white,
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        child: Text('ลงทะเบียน',
+                          style: TextStyle(fontFamily: fontFam,),),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                              MaterialPageRoute<Null>(builder: (BuildContext context) {
+                                return new WebViewScreen(
+                                  urlString: urlRegis,
+                                  titleString: 'ลงทะเบียน',
+                                );
+                              }));
+                        },
+                      ),
                     ),
                   ),
-                ),
 
-                Container(
-                  margin: const EdgeInsets.only(bottom: 20.0),
-                  child : ButtonTheme(
-                    minWidth: 250.0,
-                    height: 50.0,
-                    child:  RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(30.0)),
-                      color: Color(0xfffe0000),
-                      textColor: Colors.white,
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      child: Text('ประเมินอาจารย์'),
-                      onPressed: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
-                          return new WebViewScreen(urlString :  urlTeach);
-                        }));
-                      },
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 20.0),
+                    child : ButtonTheme(
+                      minWidth: 250.0,
+                      height: 50.0,
+                      child:  RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0)),
+                        color: Color(0xfffe0000),
+                        textColor: Colors.white,
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        child: Text('ประเมินการสอน',
+                          style: TextStyle(fontFamily: fontFam,),),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                              MaterialPageRoute<Null>(builder: (BuildContext context) {
+                                return new WebViewScreen(
+                                  urlString: urlTeach,
+                                  titleString: 'ประเมินการสอน',
+                                );
+                              }));
+                        },
+                      ),
                     ),
                   ),
-                ),
 
-                Container(
-                  margin: const EdgeInsets.only(bottom: 20.0),
-                  child : ButtonTheme(
-                    minWidth: 250.0,
-                    height: 50.0,
-                    child:  RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(30.0)),
-                      color: Color(0xffee6200),
-                      textColor: Colors.white,
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      child: Text('ส่งเกรด'),
-                      onPressed: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
-                          return new WebViewScreen(urlString :  urlGrade);
-                        }));
-                      },
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 20.0),
+                    child : ButtonTheme(
+                      minWidth: 250.0,
+                      height: 50.0,
+                      child:  RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0)),
+                        color: Color(0xffee6200),
+                        textColor: Colors.white,
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        child: Text('ส่งเกรด',
+                          style: TextStyle(fontFamily: fontFam,),),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                              MaterialPageRoute<Null>(builder: (BuildContext context) {
+                                return new WebViewScreen(
+                                  urlString: urlGrade,
+                                  titleString: 'ส่งเกรด',
+                                );
+                              }));
+                        },
+                      ),
                     ),
                   ),
-                ),
 
-                Container(
-                  margin: const EdgeInsets.only(bottom: 20.0),
-                  child : ButtonTheme(
-                    minWidth: 250.0,
-                    height: 50.0,
-                    child:  RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(30.0)),
-                      color: Color(0xfffe0000),
-                      textColor: Colors.white,
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      child: Text('สถิตินักศึกษา'),
-                      onPressed: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
-                          return new WebViewScreen(urlString :  urlStat);
-                        }));
-                      },
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 20.0),
+                    child : ButtonTheme(
+                      minWidth: 250.0,
+                      height: 50.0,
+                      child:  RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0)),
+                        color: Color(0xfffe0000),
+                        textColor: Colors.white,
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        child: Text('สถิตินักศึกษา',
+                          style: TextStyle(fontFamily: fontFam,),),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                              MaterialPageRoute<Null>(builder: (BuildContext context) {
+                                return new WebViewScreen(
+                                  urlString: urlStat,
+                                  titleString: 'สถิตินักศึกษา',
+                                );
+                              }));
+                        },
+                      ),
                     ),
                   ),
-                ),
 
-                Container(
-                  margin: const EdgeInsets.only(bottom: 20.0),
-                  child : ButtonTheme(
-                    minWidth: 250.0,
-                    height: 50.0,
-                    child:  RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(30.0)),
-                      color: Color(0xffee6200),
-                      textColor: Colors.white,
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      child: Text('ฐานข้อมูลวิจัย'),
-                      onPressed: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
-                          return new WebViewScreen(urlString :  urlResearch);
-                        }));
-                      },
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 20.0),
+                    child : ButtonTheme(
+                      minWidth: 250.0,
+                      height: 50.0,
+                      child:  RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0)),
+                        color: Color(0xffee6200),
+                        textColor: Colors.white,
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        child: Text('ฐานข้อมูลวิจัย',
+                          style: TextStyle(fontFamily: fontFam,),),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                              MaterialPageRoute<Null>(builder: (BuildContext context) {
+                                return new WebViewScreen(
+                                  urlString: urlResearch,
+                                  titleString: 'ฐานข้อมูลวิจัย',
+                                );
+                              }));
+                        },
+                      ),
                     ),
                   ),
-                ),
 
-              ],
+                ],
 
+              ),
             ),
           ),
         ),
@@ -244,12 +281,14 @@ class WebviewScreentState extends State<WebViewScreen> {
   final String urlString;
   final String titleString;
 
-@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(titleString),
-        centerTitle: true, backgroundColor: PrimaryColor
+          title: Text(titleString,
+            style: TextStyle(fontFamily: fontFam,fontWeight: FontWeight.bold,
+              fontSize: 25,),),
+          centerTitle: true, backgroundColor: PrimaryColor
       ),
       body: WebView(
         initialUrl: urlString,
