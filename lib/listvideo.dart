@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:enetb/models/job_model.dart';
+import 'package:enetb/screens/list_vr.dart';
 import 'package:enetb/screens/play_video.dart';
 import 'package:enetb/utility/my_style.dart';
 import 'package:flutter/material.dart';
@@ -113,13 +114,15 @@ class _ListVideoState extends State<ListVideo> {
         itemBuilder: (BuildContext buildContext, int index) {
           return GestureDetector(
             onTap: () {
-              MaterialPageRoute materialPageRoute =
-                  MaterialPageRoute(builder: (BuildContext buildContext) {
-                return PlayVideo(
-                  jobModel: jobModels[index],
-                );
-              });
-              Navigator.of(context).push(materialPageRoute);
+
+              int catInt = int.parse(myCategory.trim());
+
+              if (catInt <= 1) {
+                routeToPlayVideo(index, context);
+              }else{
+                routeToListVR(index, context);
+              }
+
             },
             child: Container(
               decoration: BoxDecoration(
@@ -136,5 +139,25 @@ class _ListVideoState extends State<ListVideo> {
         },
       ),
     );
+  }
+
+  void routeToListVR(int index, BuildContext context) {
+    MaterialPageRoute materialPageRoute =
+    MaterialPageRoute(builder: (BuildContext buildContext) {
+      return ListVr(
+        jobModel: jobModels[index],
+      );
+    });
+    Navigator.of(context).push(materialPageRoute);
+  }
+
+  void routeToPlayVideo(int index, BuildContext context) {
+    MaterialPageRoute materialPageRoute =
+        MaterialPageRoute(builder: (BuildContext buildContext) {
+      return PlayVideo(
+        jobModel: jobModels[index],
+      );
+    });
+    Navigator.of(context).push(materialPageRoute);
   }
 }

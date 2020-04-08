@@ -1,5 +1,5 @@
 import 'package:enetb/MenuOnlineScreen.dart';
-import 'package:enetb/listnews.dart';
+import 'package:enetb/detailnews.dart';
 import 'package:enetb/personpage.dart';
 import 'package:enetb/qrpage.dart';
 import 'package:enetb/roompage.dart';

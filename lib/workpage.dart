@@ -21,28 +21,7 @@ class _WorkPageState extends State<WorkPage> {
 
         int categoryInt = int.parse(category);
 
-        switch (categoryInt) {
-          case 2: {
-            print('cat == 2');
-          }
-          break;
-
-          case 3: {
-            print('cat == 3');
-          }
-          break;
-
-          default:{
-            MaterialPageRoute materialPageRoute =
-            MaterialPageRoute(builder: (BuildContext buildContext) {
-              return ListVideo(
-                category: category,
-              );
-            });
-            Navigator.of(context).push(materialPageRoute);
-          }
-          break;
-        }
+        routeToListVideoAndPdf(category);
 
 
       },
@@ -70,6 +49,16 @@ class _WorkPageState extends State<WorkPage> {
         height: 140.0,
       ),
     );
+  }
+
+  void routeToListVideoAndPdf(String category) {
+    MaterialPageRoute materialPageRoute =
+    MaterialPageRoute(builder: (BuildContext buildContext) {
+      return ListVideo(
+        category: category,
+      );
+    });
+    Navigator.of(context).push(materialPageRoute);
   }
 
   Widget row1() {

@@ -63,19 +63,21 @@ class _DataPageState extends State<DataPage> {
       body: Container(
         decoration: BoxDecoration(color: Colors.white),
         child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              showImageA(),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                showImageA(),
 
-              showImageB(),
+                showImageB(),
 
-              showImageC(),
+                showImageC(),
 
-              showImageD(),
+                showImageD(),
 
-              showImageE(),
-            ],
+                showImageE(),
+              ],
+            ),
           ),
         ),
       ),

@@ -21,6 +21,7 @@ dependencies:
   google_maps_flutter: ^0.5.23+1
   firebase_messaging: ^6.0.9
   barcode_scan: ^1.0.0
+  flutter_plugin_pdf_viewer: ^1.0.7
   flutter:
     sdk: flutter
 

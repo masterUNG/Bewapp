@@ -78,7 +78,7 @@ class LoginUserStudentState extends State {
                 onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
-                    return new HomeScreen(userId : message['id'], type : message['type'] );
+                    return new MainPage(userId : message['id'], type : message['type'] );
                   }));
                 },
               ),
@@ -275,7 +275,7 @@ class LoginUserTeacherState extends State {
                 onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
-                    return new HomeScreen(userId : message['id'], type : message['type'] );
+                    return new MainPage(userId : message['id'], type : message['type'] );
                   }));
                 },
               ),

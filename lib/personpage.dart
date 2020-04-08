@@ -32,29 +32,31 @@ class _PersonPageState extends State<PersonPage> {
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                FlatButton(onPressed: () {
-                  MaterialPageRoute route = MaterialPageRoute(builder: (BuildContext context){return PerA();});
-                  Navigator.of(context).push(route);
-                }
-                  , child: Image.asset('assets/images/per1.png',width: imageWidth,),),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  FlatButton(onPressed: () {
+                    MaterialPageRoute route = MaterialPageRoute(builder: (BuildContext context){return PerA();});
+                    Navigator.of(context).push(route);
+                  }
+                    , child: Image.asset('assets/images/per1.png',width: imageWidth,),),
 
 
-                FlatButton(onPressed: () {
-                  MaterialPageRoute route = MaterialPageRoute(builder: (BuildContext context){return PerB();});
-                  Navigator.of(context).push(route);
-                }
-                  , child: Image.asset('assets/images/per2.png',width: imageWidth,),),
+                  FlatButton(onPressed: () {
+                    MaterialPageRoute route = MaterialPageRoute(builder: (BuildContext context){return PerB();});
+                    Navigator.of(context).push(route);
+                  }
+                    , child: Image.asset('assets/images/per2.png',width: imageWidth,),),
 
 
-                FlatButton(onPressed: () {
-                  MaterialPageRoute route = MaterialPageRoute(builder: (BuildContext context){return PerC();});
-                  Navigator.of(context).push(route);
-                }
-                  , child: Image.asset('assets/images/per3.png',width: imageWidth,),),
-              ],
+                  FlatButton(onPressed: () {
+                    MaterialPageRoute route = MaterialPageRoute(builder: (BuildContext context){return PerC();});
+                    Navigator.of(context).push(route);
+                  }
+                    , child: Image.asset('assets/images/per3.png',width: imageWidth,),),
+                ],
+              ),
             ),
           )
         ],

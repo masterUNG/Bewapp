@@ -1,5 +1,5 @@
 import 'package:enetb/HomeScreen.dart';
-import 'package:enetb/listnews.dart';
+import 'package:enetb/detailnews.dart';
 import 'package:enetb/screens/show_notification.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -8,17 +8,28 @@ import 'package:enetb/manualpage.dart';
 import 'package:enetb/newspage.dart';
 import 'package:enetb/qrpage.dart';
 
-
 class MainPage extends StatefulWidget {
+  final String userId;
+  final String type;
+
+  MainPage({Key key, this.userId, this.type}) : super(key: key);
+
   @override
   _MainPageState createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
 //  Field
+  String userId, type;
 
   int currentIndex = 0;
-  List pages = [HomeScreen(), ListNews(), QrPage(), FirstScreen(), ManualPage()];
+  List pages = [
+    HomeScreen(),
+    ListNews(),
+    QrPage(),
+    FirstScreen(),
+    ManualPage()
+  ];
   FirebaseMessaging firebaseMessaging = FirebaseMessaging();
 
   //Method
@@ -26,6 +37,13 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    userId = widget.userId;
+    type = widget.type;
+
+    if (userId != null){
+      pages[0] = HomeScreen(userId: userId, type: type);
+    }
 
     findToken();
     receiveNotification();
@@ -41,16 +59,18 @@ class _MainPageState extends State<MainPage> {
     firebaseMessaging.configure(
       onLaunch: (Map<String, dynamic> map) {
         print('onLanch ==> $map');
-      }, onMessage: (Map<String, dynamic> map){
+      },
+      onMessage: (Map<String, dynamic> map) {
         print('onMessage ===> $map');
         fromOnMessage(map);
-    },onResume: (Map<String, dynamic> map){
+      },
+      onResume: (Map<String, dynamic> map) {
         print('onResume ===> $map');
-    },
+      },
     );
   }
 
-  Future<void> fromOnMessage(Map<String, dynamic> map)async{
+  Future<void> fromOnMessage(Map<String, dynamic> map) async {
     var result = map['notification'];
     print('result = $result');
 
@@ -58,8 +78,12 @@ class _MainPageState extends State<MainPage> {
     String title = myMap['title'];
     String message = myMap['body'];
 
-    MaterialPageRoute route = MaterialPageRoute(builder: (BuildContext buildContext){
-      return ShowNotification(title: title, message: message,);
+    MaterialPageRoute route =
+        MaterialPageRoute(builder: (BuildContext buildContext) {
+      return ShowNotification(
+        title: title,
+        message: message,
+      );
     });
     Navigator.of(context).push(route);
   }
