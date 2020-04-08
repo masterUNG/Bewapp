@@ -45,9 +45,6 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreentState extends State<HomeScreen> {
 
-  int currentIndex = 0;
-  List pages = [HomeScreen(), ListNews(), QrPage(), FirstScreen(), ManualPage()];
-  FirebaseMessaging firebaseMessaging = FirebaseMessaging();
 
   HomeScreentState(this.userId, this.type);  //constructor
   final userId;
@@ -85,28 +82,6 @@ class HomeScreentState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
 
-    Widget bottomNavBar = BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (int index) {
-          setState(() {
-            currentIndex = index;
-          });
-        },
-        backgroundColor: Colors.grey,
-        unselectedItemColor: Colors.black,
-        selectedItemColor: Colors.deepOrange,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.apps), title: Text('หน้าหลัก')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.description), title: Text('ข่าวสาร')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.camera_alt), title: Text('QR Scan')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person), title: Text('เข้าสู่ระบบ')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.book), title: Text('คู่มือการใช้งาน')),
-        ]);
 
     return Scaffold(
         appBar: AppBar(
@@ -135,7 +110,6 @@ class HomeScreentState extends State<HomeScreen> {
           backgroundColor: PrimaryColor,
         ),
 
-        bottomNavigationBar: bottomNavBar,
 
         body: Container(
           margin: EdgeInsets.fromLTRB(5.0,30.0,10.0,5.0),

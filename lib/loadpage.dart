@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const PrimaryColor = const Color(0xFFFF6B00);
 String fontFam = 'Quark';
-double imageWidth = 115;
+double imageWidth = 420;
 
 class LoadPage extends StatefulWidget {
   @override
@@ -23,32 +23,23 @@ class _LoadPageState extends State<LoadPage> {
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            color: Colors.white,
+            color: Colors.deepOrange,
           ),
           Padding(
-            padding: const EdgeInsets.all(40.0),
+            padding: const EdgeInsets.all(0.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                RaisedButton(
-                  onPressed: (){},
-                  color: Colors.grey,
-                  child: Text('เอกสารการศึกษา',style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                RaisedButton(
-                  onPressed: (){},
-                  color: Colors.grey,
-                  child: Text('เอกสารแขนงวิชา',style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold),
-                  ),
-                ),
+                FlatButton(onPressed: () {
+
+                }
+                  , child: Image.asset('assets/images/lo1.png',width: imageWidth,),),
+
+
+                FlatButton(onPressed: () {
+
+                }
+                  , child: Image.asset('assets/images/lo2.png',width: imageWidth,),),
               ],
             ),
           )
