@@ -11,7 +11,7 @@ import 'package:enetb/FirstScreen.dart';
 import 'package:enetb/ProfileScreen.dart';
 import 'package:enetb/calendara.dart';
 import 'package:enetb/manualpage.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'datapage.dart';
 import 'loadpage.dart';
 import 'mappage.dart';

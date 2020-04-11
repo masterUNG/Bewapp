@@ -1,7 +1,7 @@
 import 'package:enetb/HomeScreen.dart';
 import 'package:enetb/detailnews.dart';
 import 'package:enetb/screens/show_notification.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:enetb/FirstScreen.dart';
 import 'package:enetb/manualpage.dart';
@@ -30,7 +30,7 @@ class _MainPageState extends State<MainPage> {
     FirstScreen(),
     ManualPage()
   ];
-  FirebaseMessaging firebaseMessaging = FirebaseMessaging();
+  // FirebaseMessaging firebaseMessaging = FirebaseMessaging();
 
   //Method
   @override
@@ -45,30 +45,30 @@ class _MainPageState extends State<MainPage> {
       pages[0] = HomeScreen(userId: userId, type: type);
     }
 
-    findToken();
-    receiveNotification();
+    // findToken();
+    // receiveNotification();
   }
 
-  Future<void> findToken() async {
-    await firebaseMessaging.getToken().then((response) {
-      print('Token ===>>> ${response.toString()}');
-    });
-  }
+  // Future<void> findToken() async {
+  //   await firebaseMessaging.getToken().then((response) {
+  //     print('Token ===>>> ${response.toString()}');
+  //   });
+  // }
 
-  Future<void> receiveNotification() async {
-    firebaseMessaging.configure(
-      onLaunch: (Map<String, dynamic> map) {
-        print('onLanch ==> $map');
-      },
-      onMessage: (Map<String, dynamic> map) {
-        print('onMessage ===> $map');
-        fromOnMessage(map);
-      },
-      onResume: (Map<String, dynamic> map) {
-        print('onResume ===> $map');
-      },
-    );
-  }
+  // Future<void> receiveNotification() async {
+  //   firebaseMessaging.configure(
+  //     onLaunch: (Map<String, dynamic> map) {
+  //       print('onLanch ==> $map');
+  //     },
+  //     onMessage: (Map<String, dynamic> map) {
+  //       print('onMessage ===> $map');
+  //       fromOnMessage(map);
+  //     },
+  //     onResume: (Map<String, dynamic> map) {
+  //       print('onResume ===> $map');
+  //     },
+  //   );
+  // }
 
   Future<void> fromOnMessage(Map<String, dynamic> map) async {
     var result = map['notification'];
