@@ -5,7 +5,7 @@ import 'package:enetb/screens/show_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:enetb/FirstScreen.dart';
 import 'package:enetb/manualpage.dart';
-import 'package:enetb/newspage.dart';
+
 import 'package:enetb/qrpage.dart';
 
 class MainPage extends StatefulWidget {
